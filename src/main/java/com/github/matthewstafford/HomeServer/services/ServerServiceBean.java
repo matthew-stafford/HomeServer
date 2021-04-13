@@ -3,8 +3,17 @@ package com.github.matthewstafford.HomeServer.services;
 public class ServerServiceBean {
 
 	private int port;
-	private String url;
+	private String favicon;
 	private String name;
+	private String url;
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
 	public ServerServiceBean(int port) {
 
@@ -18,12 +27,12 @@ public class ServerServiceBean {
 		this.port = port;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getFavicon() {
+		return favicon;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setFavicon(String favicon) {
+		this.favicon = favicon;
 	}
 
 	public String getName() {
@@ -32,6 +41,11 @@ public class ServerServiceBean {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "ServerServiceBean [port=" + port + ", favicon=" + favicon + ", name=" + name + "]";
 	}
 
 }
