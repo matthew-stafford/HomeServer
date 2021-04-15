@@ -1,6 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-import ProgressBar from './components/progressBar.jsx';
+import ResourceUsage from './components/resourceUsage.jsx';
 
 class App extends React.Component {
 
@@ -10,19 +10,9 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<div id="serverStatus">
-				<div className="serverStatusSeperator">
-					CPU
-					<ProgressBar percentage="80" />
-				</div>
-				<div className="serverStatusSeperator">
-					RAM
-					<ProgressBar percentage="61" />
-				</div>
-				<div id="settingsDropDown">
-					Settings
-				</div>
-			</div>
+			<div className="reactBody">
+				<ResourceUsage/>
+			</div>		
 		)
 	}
 }
