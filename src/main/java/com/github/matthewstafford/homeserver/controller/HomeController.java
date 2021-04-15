@@ -1,4 +1,4 @@
-package com.github.matthewstafford.HomeServer.controller;
+package com.github.matthewstafford.homeserver.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

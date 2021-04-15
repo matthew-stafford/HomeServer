@@ -1,4 +1,4 @@
-package com.github.matthewstafford.HomeServer;
+package com.github.matthewstafford.homeserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

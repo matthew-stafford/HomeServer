@@ -1,4 +1,4 @@
-package com.github.matthewstafford.HomeServer.services;
+package com.github.matthewstafford.homeserver.beans;
 
 public class ServerServiceBean {
 

@@ -1,4 +1,4 @@
-package com.github.matthewstafford.HomeServer.services;
+package com.github.matthewstafford.homeserver;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -10,6 +10,8 @@ import java.util.TreeMap;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+
+import com.github.matthewstafford.homeserver.beans.ServerServiceBean;
 
 public class ServerServiceDetector {
 
