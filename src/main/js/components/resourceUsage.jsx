@@ -29,26 +29,18 @@ class ResourceUsage extends React.Component {
 				
 		return usedSize.toFixed(2) +"/"+totalSize.toFixed(2)+scaleSizes[scale];
 	}
-	
-	displayDate(ms) {
-		let seconds = (ms / 1000).toFixed(0);
-		let minutes = (ms / (1000 * 60)).toFixed(0);
-		let hours = (ms / (1000 * 60 * 60)).toFixed(0);
-		let days = (ms / (1000 * 60 * 60 * 24)).toFixed(0);
-		let finalString = "";
-		if (days > 0) {
-			finalString += days +"d ";
-		}
-		if (hours > 0 || days > 0) {
-			finalString += hours +"h ";
-		}
-		if (minutes > 0 || hours > 0 || days > 0) {
-			finalString += minutes +"m ";
-		}
-		if (seconds > 0 || minutes > 0 || hours > 0 || days > 0) {
-			finalString += seconds +"s ";
-		}
-		return finalString;
+
+	secondsToUptimeString(s) {
+		let days = Math.floor(s/86400);
+		let hours = Math.floor( ((s - (86400 * days)) / 3600 ));
+		let minutes = Math.floor( (((s - (86400 * days) ) - (3600 * hours)) / 60 ));
+		let seconds = Math.floor( (((s - (86400 * days) ) - (3600 * hours)) - (60*minutes)));
+		let uptimeString = (days > 0 ? days +'d ' : '');
+		uptimeString += (hours > 0 ? hours +'h ' : '');
+		uptimeString += (minutes > 0 ? minutes +'m ' : '');
+		uptimeString += (seconds >= 0 ? seconds +'s ' : '');
+		
+		return uptimeString;
 
 	}
 	
@@ -83,7 +75,7 @@ class ResourceUsage extends React.Component {
 		// start interval to grab data every second
 		this.interval = setInterval( () => {
 			this.fetchData();
-		}, 1000);
+		}, 500);
 	}
 
 	componentWillUnmount () {
@@ -122,7 +114,7 @@ class ResourceUsage extends React.Component {
 					''
 				}
 				<div className="serverStatusSeperator" style={{float:'bottom'}}>					
-					<small>Uptime 2: {this.state.isLoaded ? this.displayDate(this.state.data.uptime*1000) : ''}</small>
+					<small>Uptime: {this.state.isLoaded ? this.secondsToUptimeString(this.state.data.uptime) : ''}</small>
 				</div>
 				
 			</div>

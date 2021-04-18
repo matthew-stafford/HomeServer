@@ -43,7 +43,7 @@ class ServicesManager extends React.Component {
 	render() {
 		return (			
 			<div id="services">
-			
+				<p>Hello</p>
 			</div>
 		)
 	}

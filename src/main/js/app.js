@@ -1,6 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 import ResourceUsage from './components/resourceUsage.jsx';
+import ServicesManager from './components/servicesManager.jsx';
 
 class App extends React.Component {
 
@@ -14,14 +15,12 @@ class App extends React.Component {
 				<div className="row">
 					<div className="col-md-3">	
 						<div className="row">
-							<ServicesManager/>							
-						</div>				
-						<div className="row">
 							<ResourceUsage/>							
 						</div>
 					</div>
 					<div className="col-md-9">
 						
+							<ServicesManager/>			
 					</div>
 				</div>
 			</div>		
