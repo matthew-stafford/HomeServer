@@ -30,6 +30,28 @@ class ResourceUsage extends React.Component {
 		return usedSize.toFixed(2) +"/"+totalSize.toFixed(2)+scaleSizes[scale];
 	}
 	
+	displayDate(ms) {
+		let seconds = (ms / 1000).toFixed(0);
+		let minutes = (ms / (1000 * 60)).toFixed(0);
+		let hours = (ms / (1000 * 60 * 60)).toFixed(0);
+		let days = (ms / (1000 * 60 * 60 * 24)).toFixed(0);
+		let finalString = "";
+		if (days > 0) {
+			finalString += days +"d ";
+		}
+		if (hours > 0 || days > 0) {
+			finalString += hours +"h ";
+		}
+		if (minutes > 0 || hours > 0 || days > 0) {
+			finalString += minutes +"m ";
+		}
+		if (seconds > 0 || minutes > 0 || hours > 0 || days > 0) {
+			finalString += seconds +"s ";
+		}
+		return finalString;
+
+	}
+	
 	fetchData () {
 		fetch("/api/resources")
 	    .then(res => res.json())
@@ -99,6 +121,10 @@ class ResourceUsage extends React.Component {
 					: 
 					''
 				}
+				<div className="serverStatusSeperator" style={{float:'bottom'}}>					
+					<small>Uptime 2: {this.state.isLoaded ? this.displayDate(this.state.data.uptime*1000) : ''}</small>
+				</div>
+				
 			</div>
 		)
 	}

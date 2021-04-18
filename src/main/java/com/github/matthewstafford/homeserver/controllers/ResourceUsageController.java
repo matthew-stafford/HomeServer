@@ -1,4 +1,4 @@
-package com.github.matthewstafford.homeserver.controller;
+package com.github.matthewstafford.homeserver.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,7 +8,6 @@ import com.github.matthewstafford.homeserver.business.ResourceUsage;
 @RestController
 public class ResourceUsageController {
 
-	// static because we only want a single instance of this served for all clients
 	private static ResourceUsage rs;
 
 	@GetMapping("/api/resources")

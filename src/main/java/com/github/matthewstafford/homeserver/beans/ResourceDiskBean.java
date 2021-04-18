@@ -1,13 +1,13 @@
-package com.github.matthewstafford.homeserver.business;
+package com.github.matthewstafford.homeserver.beans;
 
 import java.util.HashMap;
 
-public class ResourceDisk {
+public class ResourceDiskBean {
 	private String name;
 	private long size, freeSpace;
 	private HashMap<String, ResourcePartition> partitions;
 
-	public ResourceDisk(String name) {
+	public ResourceDiskBean(String name) {
 		this.name = name;
 
 		this.partitions = new HashMap<String, ResourcePartition>();

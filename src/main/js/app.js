@@ -10,8 +10,20 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<div className="reactBody">
-				<ResourceUsage/>
+			<div className="reactBody container-fluid">
+				<div className="row">
+					<div className="col-md-3">	
+						<div className="row">
+							<ServicesManager/>							
+						</div>				
+						<div className="row">
+							<ResourceUsage/>							
+						</div>
+					</div>
+					<div className="col-md-9">
+						
+					</div>
+				</div>
 			</div>		
 		)
 	}

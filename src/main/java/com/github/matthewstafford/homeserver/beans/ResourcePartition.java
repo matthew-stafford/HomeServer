@@ -1,4 +1,4 @@
-package com.github.matthewstafford.homeserver.business;
+package com.github.matthewstafford.homeserver.beans;
 
 public class ResourcePartition {
 	private String name;

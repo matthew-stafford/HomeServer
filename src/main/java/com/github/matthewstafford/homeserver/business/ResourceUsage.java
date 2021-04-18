@@ -3,6 +3,11 @@ package com.github.matthewstafford.homeserver.business;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
+import com.github.matthewstafford.homeserver.beans.ResourceDiskBean;
+import com.github.matthewstafford.homeserver.beans.ResourcePartition;
+
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.HWDiskStore;
@@ -10,6 +15,7 @@ import oshi.hardware.HWPartition;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.OSFileStore;
 
+@Component
 public class ResourceUsage {
 
 	private static SystemInfo si = new SystemInfo();
@@ -17,7 +23,7 @@ public class ResourceUsage {
 	private static CentralProcessor cpu = hal.getProcessor();
 	private static long[] PREV_TICKS = new long[CentralProcessor.TickType.values().length];
 	private static long TIME_LAST_UPDATED = 0;
-	private static int TIME_BETWEEN_UPDATES = 1000; // 2 seconds
+	private static int TIME_BETWEEN_UPDATES = 1000; // 1 seconds
 	private static int TIME_BETWEEN_DISK_REFRESHES = 60000; //60 seconds
 	private static long TIME_LAST_REFRESHED_DISKS = 0;
 
@@ -41,7 +47,7 @@ public class ResourceUsage {
 	private long bootTime;
 	private long availableMemory;
 	private long totalMemory;
-	private HashMap<String, ResourceDisk> disks;
+	private HashMap<String, ResourceDiskBean> disks;
 
 	public ResourceUsage() {
 		cpuName = cpu.getProcessorIdentifier().getName();
@@ -54,11 +60,11 @@ public class ResourceUsage {
 		return cpuUsage;
 	}
 
-	public HashMap<String, ResourceDisk> getDisks() {
+	public HashMap<String, ResourceDiskBean> getDisks() {
 		return disks;
 	}
 
-	public void setDisks(HashMap<String, ResourceDisk> disks) {
+	public void setDisks(HashMap<String, ResourceDiskBean> disks) {
 		this.disks = disks;
 	}
 
@@ -66,15 +72,14 @@ public class ResourceUsage {
 		if (canUpdate()) {
 			cpuUsage = getCPU();
 			availableMemory = hal.getMemory().getAvailable();
-
 			uptime = si.getOperatingSystem().getSystemUptime();
 
 			if (canUpdateDisks()) {
-				HashMap<String, ResourceDisk> disks = new HashMap<String, ResourceDisk>();
+				HashMap<String, ResourceDiskBean> disks = new HashMap<String, ResourceDiskBean>();
 
 				// list disks and partitions
 				for (HWDiskStore store : hal.getDiskStores()) {
-					disks.put(store.getName(), new ResourceDisk(store.getName()));
+					disks.put(store.getName(), new ResourceDiskBean(store.getName()));
 					disks.get(store.getName()).setSize(store.getSize());
 					for (HWPartition part : store.getPartitions()) {
 						disks.get(store.getName()).getPartitions().put(part.getIdentification(), new ResourcePartition());
@@ -85,7 +90,7 @@ public class ResourceUsage {
 				// get storage data (free/used space + model numbers)
 				for (OSFileStore store : si.getOperatingSystem().getFileSystem().getFileStores()) {
 					// find disk for each store
-					for (Map.Entry<String, ResourceDisk> d : disks.entrySet()) {
+					for (Map.Entry<String, ResourceDiskBean> d : disks.entrySet()) {
 						// if disk contains partition
 						if (d.getValue().getPartitions().containsKey(store.getName())) {
 							// add data
@@ -127,7 +132,6 @@ public class ResourceUsage {
 	}
 
 	public long getAvailableMemory() {
-		update();
 		return availableMemory;
 	}
 
