@@ -75,7 +75,7 @@ class ResourceUsage extends React.Component {
 		// start interval to grab data every second
 		this.interval = setInterval( () => {
 			this.fetchData();
-		}, 500);
+		}, 800);
 	}
 
 	componentWillUnmount () {

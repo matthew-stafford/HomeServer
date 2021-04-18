@@ -12,7 +12,7 @@ public class Main {
 
 	/*
 	 * Server port can be changed by using -Dserver.port=80 as a param when
-	 * running the jar file
+	 * running the jar file i.e. java -Dserver.port=80 -jar HomeServer.jar
 	 */
 	public static void main(String[] args) {
 

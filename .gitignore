@@ -33,3 +33,4 @@ build/
 .vscode/
 /node_modules/
 /database.mv.db
+/database.trace.db

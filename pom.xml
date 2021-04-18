@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.github.matthewstafford</groupId>
-	<artifactId>HomeServerWeb</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>HomeServerWeb</name>
+	<artifactId>HomeServer</artifactId>
+	<version>0.1</version>
+	<name>HomeServer</name>
 	<description>Home server project using spring boot &amp; react</description>
 	<properties>
 		<java.version>1.8</java.version>

@@ -18,9 +18,13 @@ class App extends React.Component {
 							<ResourceUsage/>							
 						</div>
 					</div>
-					<div className="col-md-9">
+					<div className="col-md-9">	
+						<div className="col-md-4">					
+							<ServicesManager/>		
+						</div>
+						<div className="col-md-4">
 						
-							<ServicesManager/>			
+						</div>	
 					</div>
 				</div>
 			</div>		
