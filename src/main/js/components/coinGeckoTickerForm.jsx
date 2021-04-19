@@ -4,7 +4,7 @@ import Select from 'react-select';
 class CryptoTickerForm extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {name: '', id:'', options: [] };
+		this.state = {name: '', geckoId:'', options: [] };
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.fetchAllCoinsData = this.fetchAllCoinsData.bind(this);
@@ -18,7 +18,7 @@ class CryptoTickerForm extends React.Component {
 		    headers: {
 		      "Content-Type": "application/json"
 		    },
-		    body: JSON.stringify( {id: this.state.id, name: this.state.name})
+		    body: JSON.stringify( {geckoId: this.state.id, name: this.state.name})
 	    })
 		.then(resp => resp.json())
 		.then(

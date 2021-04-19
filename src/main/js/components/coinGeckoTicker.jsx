@@ -63,8 +63,9 @@ class CoinGeckoTicker extends React.Component {
 								</thead>
 								<tbody>{
 										this.state.data._embedded.coinGeckoTickers.map( (item, index) =>
-											<tr key={item.code}>
-												<td>{item.code}</td>
+											
+											<tr key={item.id}>
+												<td>{item.name}</td>
 												<td></td>
 												<td></td>
 												<td></td>
