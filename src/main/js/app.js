@@ -2,6 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 import ResourceUsage from './components/resourceUsage.jsx';
 import ServicesManager from './components/servicesManager.jsx';
+import CoinGeckoTicker from './components/coinGeckoTicker.jsx';
 
 class App extends React.Component {
 
@@ -18,14 +19,12 @@ class App extends React.Component {
 							<ResourceUsage/>							
 						</div>
 					</div>
-					<div className="col-md-9">	
-						<div className="col-md-4">					
-							<ServicesManager/>		
-						</div>
-						<div className="col-md-4">
-						
-						</div>	
+					<div className="col-md-4">						
+						<ServicesManager/>		
 					</div>
+					<div className="col-md-5">
+						<CoinGeckoTicker/>
+					</div>	
 				</div>
 			</div>		
 		)
