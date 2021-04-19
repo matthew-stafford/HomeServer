@@ -8,8 +8,9 @@ class CryptoTickerForm extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.fetchAllCoinsData = this.fetchAllCoinsData.bind(this);
-	}
 
+	}
+	
 	handleChange(event) {  this.setState({id: event.value, name:event.label.substr(event.label.indexOf(' ')+1, event.label.length) }); }
 	handleSubmit(event) {
 		// save data
@@ -23,11 +24,8 @@ class CryptoTickerForm extends React.Component {
 		.then(resp => resp.json())
 		.then(
 	      (result) => {
-	        this.setState({
-	          isLoaded: true,
-	          data: result
-	        });
-	      },
+			this.props.updateData(result)
+			},
 	      (error) => {
 			console.log(error);
 	        this.setState({
@@ -43,7 +41,6 @@ class CryptoTickerForm extends React.Component {
 		// prevent page submit
 		event.preventDefault();
   	}
-
 
 	fetchData(page) {
 		fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page="+page)

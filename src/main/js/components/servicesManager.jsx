@@ -59,7 +59,7 @@ class ServicesManager extends React.Component {
 									this.state.data.serverServiceBeans.map( (item) => 
 										<tr key={item.port}>
 											<td>
-												<img width="22" height="22" src={'http://'+document.location.hostname+':'+item.port+(item.favicon != null && item.favicon.startsWith('/') ? '' : '/')+item.favicon}/> <a target="_blank" href={'http://'+document.location.hostname+':'+item.port}>{item.name}</a>
+												<img width="22" height="22" src={'http://'+document.location.hostname+':'+item.port+(item.favicon != null && item.favicon.startsWith('/') ? '' : '/')+item.favicon}/><a target="_blank" href={'http://'+document.location.hostname+':'+item.port}>{item.name}</a>
 											</td>
 										</tr>
 									 ) : ''

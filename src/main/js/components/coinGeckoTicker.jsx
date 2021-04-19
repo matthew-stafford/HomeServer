@@ -11,24 +11,33 @@ class CoinGeckoTicker extends React.Component {
 			error: null,
 			isLoaded: false
 		}
+		
+		this.updateData = this.updateData.bind(this);
+
 	}
 	
+	// update from child once a coin has been added to springboot database
+	updateData(coin) {
+		let obj = {name: coin.name, geckoId: coin.geckoId};
+		let data = this.state.data;
+		
+		data._embedded.coinGeckoTickers.push(obj);
+		
+		this.setState({data:data});
+	}
 	
+	// grab data from springboot database for which coins to display
 	fetchData () {
 		fetch("/api/coinGeckoTickers")
 	    .then(res => res.json())
 	    .then(
-	      (result) => {
-			console.log(result); 		
+	      (result) => {	
 	        this.setState({
 	          isLoaded: true,
 	          data: result
 
 	        });
 	      },
-	      // Note: it's important to handle errors here
-	      // instead of a catch() block so that we don't swallow
-	      // exceptions from actual bugs in components.
 	      (error) => {
 			console.log(error);
 	        this.setState({
@@ -64,7 +73,7 @@ class CoinGeckoTicker extends React.Component {
 								<tbody>{
 										this.state.data._embedded.coinGeckoTickers.map( (item, index) =>
 											
-											<tr key={item.id}>
+											<tr key={item.geckoId}>
 												<td>{item.name}</td>
 												<td></td>
 												<td></td>
@@ -76,7 +85,7 @@ class CoinGeckoTicker extends React.Component {
 							</table>	
 							: <p>Get started using the Coin Gecko price ticker by adding a coin</p>
 					}
-				    <CoinGeckoTickerForm/>
+				    <CoinGeckoTickerForm updateData={this.updateData}/>
 				  </div>
 				</div>
 			</div>
