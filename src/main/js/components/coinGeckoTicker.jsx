@@ -9,6 +9,8 @@ class CoinGeckoTicker extends React.Component {
 		this.state = {
 			data: {},
 			error: null,
+			priceData: {},
+			priceDataLoaded: false,
 			isLoaded: false
 		}
 		
@@ -32,11 +34,19 @@ class CoinGeckoTicker extends React.Component {
 	    .then(res => res.json())
 	    .then(
 	      (result) => {	
-	        this.setState({
+
+		    this.setState({
 	          isLoaded: true,
 	          data: result
-
+		
 	        });
+			
+			// now that this has loaded, we can get data from coingecko
+			// get data immediately and start an interval
+			this.getCoinGeckoPriceData();
+			this.interval = setInterval( () => {
+				this.getCoinGeckoPriceData();
+			}, 3000);
 	      },
 	      (error) => {
 			console.log(error);
@@ -48,19 +58,50 @@ class CoinGeckoTicker extends React.Component {
 	    )
 	}
 	
+	getCoinGeckoPriceData() {
+		let coins = "";
+		this.state.data._embedded.coinGeckoTickers.map( (item, index) => 
+			coins = coins + item.geckoId+","
+		 );
+
+	
+		let url = "https://api.coingecko.com/api/v3/simple/price?ids="+coins+"&vs_currencies=usd%2Cbtc&include_24hr_change=true";
+		
+		fetch(url)
+		    .then(res => res.json())
+		    .then(
+		      (result) => {	
+			    this.setState({
+		          priceDataLoaded: true,
+		          priceData: result
+			
+		        });
+	
+		      },
+		      (error) => {
+				console.log(error);
+		        this.setState({
+		          priceDataLoaded: true,
+		          error
+		        });
+		      }
+		    )
+	}
+	
 	componentDidMount() {
 		this.fetchData();
 	}
 	
 	render() {
 		return (			
+
 			<div id="coinGeckoTicker">
 				<div className="card">
 				  <div className="card-body">
 				    <h5 className="card-title">Coin Gecko</h5>
-	
+					
 					{
-						this.state.isLoaded && this.state.data._embedded.coinGeckoTickers.length > 0 ?			
+						this.state.priceDataLoaded ?			
 							<table className="table table-condensed">
 								<thead>
 									<tr>
@@ -70,16 +111,16 @@ class CoinGeckoTicker extends React.Component {
 								    	<th scope="col">24h %</th>
 									</tr>
 								</thead>
-								<tbody>{
-										this.state.data._embedded.coinGeckoTickers.map( (item, index) =>
-											
+								<tbody>
+									{
+										this.state.data._embedded.coinGeckoTickers.map( (item,index) =>
 											<tr key={item.geckoId}>
 												<td>{item.name}</td>
-												<td></td>
-												<td></td>
-												<td></td>
+												<td>{this.state.priceData[item.geckoId].usd.toFixed(2)}</td>
+												<td>{this.state.priceData[item.geckoId].btc.toFixed(8)}</td>
+												<td>{this.state.priceData[item.geckoId].btc_24h_change.toFixed(2)}</td>
 											</tr>
-										 )
+										)
 									}
 								</tbody>
 							</table>	
