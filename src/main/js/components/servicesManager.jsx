@@ -47,7 +47,7 @@ class ServicesManager extends React.Component {
 				  <div className="card-body">
 				    <h5 className="card-title">Services</h5>
 	
-					<table className="table table-condensed">
+					<table className="table table-sm">
 						<thead>
 							<tr>
 						    	<th scope="col">Name</th>
@@ -57,12 +57,8 @@ class ServicesManager extends React.Component {
 							{
 								this.state.isLoaded ? 
 									this.state.data.serverServiceBeans.map( (item) => 
-										<tr key={item.port}>
-											<td>
-												<img width="22" height="22" src={'http://'+document.location.hostname+':'+item.port+(item.favicon != null && item.favicon.startsWith('/') ? '' : '/')+item.favicon}/><a target="_blank" href={'http://'+document.location.hostname+':'+item.port}>{item.name}</a>
-											</td>
-										</tr>
-									 ) : ''
+										<tr key={item.port}><td><img width="22" height="22" src={'http://'+document.location.hostname+':'+item.port+(item.favicon != null && item.favicon.startsWith('/') ? '' : '/')+item.favicon}/> <a target="_blank" href={'http://'+document.location.hostname+':'+item.port}>{item.name}</a></td></tr>
+									 ) : null
 							}
 						</tbody>
 					</table>				    

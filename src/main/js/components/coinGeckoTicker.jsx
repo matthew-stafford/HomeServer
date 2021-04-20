@@ -105,6 +105,14 @@ class CoinGeckoTicker extends React.Component {
 	
 	
 	render() {
+		const styleGreen = {
+			color: "green"
+		};
+		
+		const styleRed = {
+			color: "red"
+		};
+		
 		return (			
 
 			<div id="coinGeckoTicker">
@@ -130,7 +138,7 @@ class CoinGeckoTicker extends React.Component {
 												<td>{item.name}</td>
 												<td>{this.state.priceData[item.geckoId].usd.toFixed(2)}</td>
 												<td>{this.state.priceData[item.geckoId].btc.toFixed(8)}</td>
-												<td>{this.state.priceData[item.geckoId].btc_24h_change.toFixed(2)}</td>
+												<td style={this.state.priceData[item.geckoId].btc_24h_change.toFixed(2) >= 0 ? styleGreen : styleRed}>{this.state.priceData[item.geckoId].btc_24h_change.toFixed(2)}%</td>
 											</tr>
 										)
 									}
