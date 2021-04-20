@@ -1,5 +1,6 @@
 import React from 'react';
 import CoinGeckoTickerForm from './coinGeckoTickerForm.jsx';
+import CoinGeckoInfoModal from './coinGeckoInfoModal.jsx';
 
 class CoinGeckoTicker extends React.Component {
 	
@@ -8,10 +9,14 @@ class CoinGeckoTicker extends React.Component {
 		
 		this.state = {
 			data: {},
+			isLoaded: false,
 			error: null,
+			
 			priceData: {},
 			priceDataLoaded: false,
-			isLoaded: false
+			
+			selectedGeckoId: null,
+			showInfoModal: false
 		}
 		
 		this.updateData = this.updateData.bind(this);
@@ -57,7 +62,7 @@ class CoinGeckoTicker extends React.Component {
 	      }
 	    )
 	}
-	
+		
 	getCoinGeckoPriceData() {
 		let coins = "";
 		this.state.data._embedded.coinGeckoTickers.map( (item, index) => 
@@ -88,9 +93,16 @@ class CoinGeckoTicker extends React.Component {
 		    )
 	}
 	
+	showInfoModal = (event) => {
+		let selectedGeckoId = event.currentTarget.attributes["data-hs-geckoid"].value;
+		console.log(selectedGeckoId);
+		this.setState({selectedGeckoId: selectedGeckoId, showInfoModal: true});
+	}
+	
 	componentDidMount() {
 		this.fetchData();
 	}
+	
 	
 	render() {
 		return (			
@@ -102,7 +114,7 @@ class CoinGeckoTicker extends React.Component {
 					
 					{
 						this.state.priceDataLoaded ?			
-							<table className="table table-condensed">
+							<table className="table table-sm">
 								<thead>
 									<tr>
 								    	<th scope="col">Name</th>
@@ -114,7 +126,7 @@ class CoinGeckoTicker extends React.Component {
 								<tbody>
 									{
 										this.state.data._embedded.coinGeckoTickers.map( (item,index) =>
-											<tr key={item.geckoId}>
+											<tr data-hs-geckoid={item.geckoId} data-bs-toggle="modal" data-bs-target="#geckoInfoModal" onClick={this.showInfoModal} key={item.geckoId}>
 												<td>{item.name}</td>
 												<td>{this.state.priceData[item.geckoId].usd.toFixed(2)}</td>
 												<td>{this.state.priceData[item.geckoId].btc.toFixed(8)}</td>
@@ -124,7 +136,12 @@ class CoinGeckoTicker extends React.Component {
 									}
 								</tbody>
 							</table>	
-							: <p>Get started using the Coin Gecko price ticker by adding a coin</p>
+							: <p>Get started using the Coin Gecko price ticker by adding a coin</p>}
+							{
+					
+						this.state.showInfoModal ? 
+							<CoinGeckoInfoModal geckoId={this.state.selectedGeckoId} />
+							: ''
 					}
 				    <CoinGeckoTickerForm updateData={this.updateData}/>
 				  </div>

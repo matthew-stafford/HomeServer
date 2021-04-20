@@ -83,7 +83,7 @@ class CryptoTickerForm extends React.Component {
 		if (this.state.options.length == 0) {
 			this.fetchData(1);
 			
-			for (let i = 2 ; i <= 1; i++) {
+			for (let i = 2 ; i <= 7; i++) {
 				setTimeout(this.fetchData(i), i*750);	
 			}
 		}
@@ -106,7 +106,7 @@ class CryptoTickerForm extends React.Component {
 					        		<h5 className="modal-title" id="geckoModalLabel" >Add coin</h5>
 					        		<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					      		</div>
-					      		<div className="modal-body autocomplete">    
+					      		<div className="modal-body">    
 					          		Coin:
 					          		<Select loading="true" onChange={this.handleChange} options={this.state.options} />        
 			     				</div>
