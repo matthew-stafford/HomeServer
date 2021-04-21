@@ -46,23 +46,25 @@ class ServicesManager extends React.Component {
 				<div className="card">
 				  <div className="card-body">
 				    <h5 className="card-title">Services</h5>
-	
-					<table className="table table-sm">
-						<thead>
-							<tr>
-						    	<th scope="col">Name</th>
-							</tr>
-						</thead>
-						<tbody>
-							{
-								this.state.isLoaded ? 
-									this.state.data.serverServiceBeans.map( (item) => 
-										<tr key={item.port}><td><img width="22" height="22" src={'http://'+document.location.hostname+':'+item.port+(item.favicon != null && item.favicon.startsWith('/') ? '' : '/')+item.favicon}/> <a target="_blank" href={'http://'+document.location.hostname+':'+item.port}>{item.name}</a></td></tr>
-									 ) : null
-							}
-						</tbody>
-					</table>				    
-
+					{
+						this.state.isLoaded && this.state.data.serverServiceBeans.length > 0 ?
+						<table className="table table-sm">
+							<thead>
+								<tr>
+							    	<th scope="col">Name</th>
+								</tr>
+							</thead>
+							<tbody>
+								{
+									 
+										this.state.data.serverServiceBeans.map( (item) => 
+											<tr key={item.port}><td><img width="22" height="22" src={'http://'+document.location.hostname+':'+item.port+(item.favicon != null && item.favicon.startsWith('/') ? '' : '/')+item.favicon}/> <a target="_blank" href={'http://'+document.location.hostname+':'+item.port}>{item.name}</a></td></tr>
+										 ) 
+								}
+							</tbody>
+						</table>	
+						: <p>No services were detected automatically, you can add them manually below.</p>			    
+					}
 				    <a href="#" className="btn btn-primary">Add manually</a>
 				  </div>
 				</div>

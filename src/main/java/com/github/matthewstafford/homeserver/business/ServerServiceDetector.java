@@ -10,33 +10,21 @@ import java.util.TreeMap;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.springframework.beans.factory.annotation.Value;
 
 import com.github.matthewstafford.homeserver.beans.ServerServiceBean;
 
 public class ServerServiceDetector {
-
-	@Value("${server.port}")
-	private int serverPort;
 
 	public TreeMap<Integer, ServerServiceBean> ports = new TreeMap<Integer, ServerServiceBean>();
 
 	public void update() {
 		final int min = 1, max = 65535;
 		for (int i = min; i < max; i++) {
-			if (i != serverPort) {
-				ServerServiceBean bean = checkWebService("http://localhost", i);
-				if (bean != null) {
-					ports.put(i, bean);
-				}
+			ServerServiceBean bean = checkWebService("http://localhost", i);
+			if (bean != null) {
+				ports.put(i, bean);
 			}
 		}
-
-		ServerServiceBean server = new ServerServiceBean(serverPort);
-		server.setFavicon("/favicon.ico");
-		server.setName("Home Server");
-		server.setPort(serverPort);
-		ports.put(serverPort, server);
 	}
 
 	public TreeMap<Integer, ServerServiceBean> getPorts() {
