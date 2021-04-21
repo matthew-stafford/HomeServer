@@ -24,7 +24,7 @@ class CryptoTickerForm extends React.Component {
 		.then(resp => resp.json())
 		.then(
 	      (result) => {
-			this.props.updateData(result)
+			this.props.parentFetchData()
 			},
 	      (error) => {
 			console.log(error);

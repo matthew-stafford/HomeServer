@@ -34,7 +34,7 @@ class CoinGeckoTicker extends React.Component {
 	}
 	
 	// grab data from springboot database for which coins to display
-	fetchData () {
+	fetchData = () => {
 		fetch("/api/coinGeckoTickers")
 	    .then(res => res.json())
 	    .then(
@@ -133,25 +133,28 @@ class CoinGeckoTicker extends React.Component {
 								</thead>
 								<tbody>
 									{
+										
+										this.state.priceDataLoaded ? 
 										this.state.data._embedded.coinGeckoTickers.map( (item,index) =>
 											<tr data-hs-geckoid={item.geckoId} data-bs-toggle="modal" data-bs-target="#geckoInfoModal" onClick={this.showInfoModal} key={item.geckoId}>
 												<td>{item.name}</td>
-												<td>{this.state.priceData[item.geckoId].usd.toFixed(2)}</td>
-												<td>{this.state.priceData[item.geckoId].btc.toFixed(8)}</td>
-												<td style={this.state.priceData[item.geckoId].btc_24h_change.toFixed(2) >= 0 ? styleGreen : styleRed}>{this.state.priceData[item.geckoId].btc_24h_change.toFixed(2)}%</td>
+												<td>{this.state.priceData[item.geckoId] != null ? this.state.priceData[item.geckoId].usd.toFixed(2) : null}</td>
+												<td>{this.state.priceData[item.geckoId] != null ? this.state.priceData[item.geckoId].btc.toFixed(8) : null}</td>
+												<td style={this.state.priceData[item.geckoId] != null && this.state.priceData[item.geckoId].btc_24h_change.toFixed(2) >= 0 ? styleGreen : styleRed}>{this.state.priceData[item.geckoId] != null ? this.state.priceData[item.geckoId].btc_24h_change.toFixed(2) : 0}%</td>
 											</tr>
 										)
+										: null
 									}
 								</tbody>
 							</table>	
 							: <p>Get started using the Coin Gecko price ticker by adding a coin</p>}
 							{
 					
-						this.state.showInfoModal ? 
-							<CoinGeckoInfoModal geckoId={this.state.selectedGeckoId} />
-							: ''
+						
+							
 					}
-				    <CoinGeckoTickerForm updateData={this.updateData}/>
+					<CoinGeckoInfoModal parentFetchData={this.fetchData} parentData={this.state.data} geckoId={this.state.selectedGeckoId} />
+				    <CoinGeckoTickerForm parentFetchData={this.fetchData}/>
 				  </div>
 				</div>
 			</div>

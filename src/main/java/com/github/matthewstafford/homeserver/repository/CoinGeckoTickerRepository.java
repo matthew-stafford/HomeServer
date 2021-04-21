@@ -1,8 +1,8 @@
 package com.github.matthewstafford.homeserver.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import com.github.matthewstafford.homeserver.entity.CoinGeckoTicker;
 
-public interface CoinGeckoTickerRepository extends JpaRepository<CoinGeckoTicker, Integer> {
+public interface CoinGeckoTickerRepository extends CrudRepository<CoinGeckoTicker, Integer> {
 }
