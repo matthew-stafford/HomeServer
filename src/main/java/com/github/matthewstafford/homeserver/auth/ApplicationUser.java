@@ -1,53 +1,63 @@
 package com.github.matthewstafford.homeserver.auth;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.github.matthewstafford.homeserver.entity.User;
 
 public class ApplicationUser implements UserDetails {
-
-	private User user;
 	
-	public ApplicationUser(User user) {
-		this.user = user;
+	private List<? extends GrantedAuthority> grantedAuthorities;
+	private String password, username;
+	private boolean isAccountNonExpired = false, isAccountNonLocked = false, isCredentialsNonExpired = false, isEnabled = false;
+	 
+	
+	public ApplicationUser(List<? extends GrantedAuthority> grantedAuthorities, String password, String username, boolean isAccountNonExpired, boolean isAccountNonLocked,
+			boolean isCredentialsNonExpired, boolean isEnabled) {
+		this.grantedAuthorities = grantedAuthorities;
+		this.password = password;
+		this.username = username;
+		this.isAccountNonExpired = isAccountNonExpired;
+		this.isAccountNonLocked = isAccountNonLocked;
+		this.isCredentialsNonExpired = isCredentialsNonExpired;
+		this.isEnabled = isEnabled;
 	}
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		return this.grantedAuthorities;
 	}
 
 	@Override
 	public String getPassword() {
-		return null;
+		return this.password;
 	}
 
 	@Override
 	public String getUsername() {
-		return null;
+		return this.username;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return false;
+		return this.isAccountNonExpired;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return false;
+		return this.isAccountNonLocked;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return false;
+		return this.isCredentialsNonExpired;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return false;
+		return this.isEnabled;
 	}
 
 	
