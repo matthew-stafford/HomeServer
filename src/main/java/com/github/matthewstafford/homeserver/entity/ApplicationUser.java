@@ -51,7 +51,7 @@ public class ApplicationUser implements UserDetails {
 	private boolean isAccountNonExpired = false, isAccountNonLocked = false, isCredentialsNonExpired = false, isEnabled = false;
 	 
 	
-	public ApplicationUser(String password, String username, ApplicationUserRole applicationUserRole, boolean isAccountNonExpired, boolean isAccountNonLocked,
+	public ApplicationUser(String username, String password, ApplicationUserRole applicationUserRole, boolean isAccountNonExpired, boolean isAccountNonLocked,
 			boolean isCredentialsNonExpired, boolean isEnabled) {
 		this.password = password;
 		this.username = username;
@@ -66,36 +66,6 @@ public class ApplicationUser implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		SimpleGrantedAuthority  sga = new SimpleGrantedAuthority(applicationUserRole.name());
 		return Collections.singletonList(sga);
-	}
-
-	@Override
-	public String getPassword() {
-		return this.password;
-	}
-
-	@Override
-	public String getUsername() {
-		return this.username;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		return this.isAccountNonExpired;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return this.isAccountNonLocked;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return this.isCredentialsNonExpired;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return this.isEnabled;
 	}
 
 	

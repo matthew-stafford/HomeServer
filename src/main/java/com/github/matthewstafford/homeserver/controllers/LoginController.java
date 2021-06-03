@@ -14,7 +14,7 @@ public class LoginController {
 	
 	@GetMapping("/login")
 	private String login() {
-		if (applicationUserRepository.getUserCount() == 0) {
+		if (applicationUserRepository.count() == 0) {
 			return "initial-register";
 		}
 		return "login";

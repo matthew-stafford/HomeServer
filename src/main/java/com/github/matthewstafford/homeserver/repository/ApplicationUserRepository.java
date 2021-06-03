@@ -10,9 +10,7 @@ import com.github.matthewstafford.homeserver.entity.ApplicationUser;
 
 @Repository
 @Transactional(readOnly = true)
-public interface ApplicationUserRepository {
+public interface ApplicationUserRepository extends JpaRepository<ApplicationUser, Long>{
 
-	Optional<ApplicationUser> findByEmail(String email);
-	int getUserCount();
-	
+	Optional<ApplicationUser> findByUsername(String username);	
 }
