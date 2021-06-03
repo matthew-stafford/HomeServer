@@ -5,6 +5,8 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.rest.core.mapping.HttpMethods;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.provisioning.JdbcUserDetailsManagerConfigurer;
@@ -33,13 +35,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
+			.csrf().disable()
 			.authorizeRequests()
-			.antMatchers("/favicon.ico", "/css/**", "/js/**", "/built/**").permitAll()			
+			.antMatchers(HttpMethod.GET, "/favicon.ico", "/css/**", "/js/**", "/built/**", "/login", "/register")
+				.permitAll()			
+			.antMatchers(HttpMethod.POST, "/register")
+				.permitAll()
 			.anyRequest()
-			.authenticated()
+				.authenticated()
 				.and()
 				.formLogin()
-				.loginPage("/login").permitAll();
+				.loginPage("/login")
+		        .permitAll();
 	}
 
 	@Override

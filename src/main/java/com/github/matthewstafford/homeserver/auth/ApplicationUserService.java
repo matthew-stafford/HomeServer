@@ -9,17 +9,15 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.github.matthewstafford.homeserver.entity.ApplicationUser;
+import com.github.matthewstafford.homeserver.repository.ApplicationUserRepository;
+
 @Repository
-public class ApplicationUserDaoService implements ApplicationUserDao {
+public class ApplicationUserService implements ApplicationUserRepository {
 
 	@Autowired
 	private DataSource dataSource;
 	
-	@Override
-	public Optional<ApplicationUser> selectUserByUsername(String username) {
-		return Optional.empty();
-	}
-
 	@Override
 	public int getUserCount() {
 		try {
@@ -38,5 +36,12 @@ public class ApplicationUserDaoService implements ApplicationUserDao {
 		}
 		return 0;
 	}
+
+	@Override
+	public Optional<ApplicationUser> findByEmail(String email) {
+		System.out.println("find by email");
+		return null;
+	}
+
 
 }

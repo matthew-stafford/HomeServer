@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>Initial setup</title>
+    <link rel="stylesheet" href="/css/security.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+
+ 	<div class="container">
+		<form name="initial-register" action="/register" method="POST" onSubmit="return validateForm()">
+	    	<h1>Initial setup</h1>
+    		
+    		<p>Setup your admin account. This account will have full admin rights to the Home Server application.<p>
+    		<p>Do not share these details with anybody and make sure you pick a secure password.</p>
+    		
+			<div class="form-group">
+				<label for="email">Email address</label>
+			    <input onKeyUp="return validateForm()" type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+			</div>
+			
+			<div class="form-group">
+				<label for="password">Password</label>
+			    <input onKeyUp="return validateForm()" type="password" class="form-control" name="password" id="password" placeholder="Password">
+				<small>Password must be at least 8 characters</small>
+			</div>
+			
+			<div class="form-group">
+				<label for="confirmPassword">Confirm Password</label>
+			    <input onKeyUp="return validateForm()" type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+				<small>Password must match the above password</small>
+			</div>
+		    
+    		<button type="submit" class="btn btn-primary" id="register-button" disabled>Finish</button>
+		  	
+		</form>
+	</div>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/initial-register.js"></script>
+</body>
+</html>
