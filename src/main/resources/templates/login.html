@@ -2,23 +2,30 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head lang="en">
     <meta charset="UTF-8"/>
-    <title>Initial setup</title>
+    <title>Login</title>
     <link rel="stylesheet" href="/css/security.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 <body>
 
  	<div class="container">
-		<form name="login-form" action="/login" method="POST" onSubmit="return validateForm()">
+		<form name="login-form" action="/perform_login" method="POST" onSubmit="return validateForm()">
 	    	<h1>Login</h1>
 			<div class="form-group">
-				<label for="email">Email address</label>
-			    <input onKeyUp="return validateForm()" type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+				<label for="username">Email address</label>
+			    <input onKeyUp="return validateForm()" type="email" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter email">
 			</div>
 			
 			<div class="form-group">
 				<label for="password">Password</label>
 			    <input onKeyUp="return validateForm()" type="password" class="form-control" name="password" id="password" placeholder="Password">
+			</div>
+			
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" value="" name="remember-me" id="remember-me">
+				<label class="form-check-label" for="remember-me">
+			    	Remember me
+				</label>
 			</div>
 			
     		<button type="submit" class="btn btn-primary" id="login-button" disabled>Login</button>
