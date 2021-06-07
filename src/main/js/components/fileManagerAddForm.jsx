@@ -4,7 +4,9 @@ class FileManagerAddForm extends React.Component {
 	
 	constructor(props) {
 		super(props);
-		this.state = {fileLocation:''};
+		this.state = {
+			fileLocation:''
+		};
 		
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,9 +28,13 @@ class FileManagerAddForm extends React.Component {
 		.then(
 	      (result) => {
 			console.log(result);
+			
+			this.props.parentFetchData();
 			},
 	      (error) => {
 			console.log(error);
+			
+			this.props.parentFetchData();
 	      }
 	    );
 

@@ -16,7 +16,7 @@ class FileManager extends React.Component {
 	}
 	
 		
-	fetchData () {
+	fetchData = () => {
 		fetch("/api/fileLocations")
 	    .then(res => res.json())
 	    .then(
@@ -56,7 +56,7 @@ class FileManager extends React.Component {
 				  <div className="card-body">
 				    <h5 className="card-title">Folder/Files</h5>
 					{
-						this.state.isLoaded ?
+						this.state.isLoaded && this.state.data._embedded.fileLocations.length > 0 ?
 							<table className="table table-sm">
 								<thead>
 									<tr>
