@@ -9,8 +9,15 @@
 <body>
 
  	<div class="container">
+
+ 	
 		<form name="login-form" action="/perform_login" method="POST" onSubmit="return validateForm()">
-	    	<h1>Login</h1>
+	    	<h1>Login</h1> 		
+	    	
+	    	<div id="errorMessage" class="alert alert-danger" role="alert" style="display:none;">
+		  		Error: Email address or password is incorrect.
+			</div>
+			
 			<div class="form-group">
 				<label for="username">Email address</label>
 			    <input onKeyUp="return validateForm()" type="email" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter email">
@@ -34,5 +41,10 @@
 	</div>
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/login-form.js"></script>
+	<script>
+ 		if (window.location.search === '?error') {
+			document.getElementById("errorMessage").style.display = "block";
+		}
+ 	</script>
 </body>
 </html>
