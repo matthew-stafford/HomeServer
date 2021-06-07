@@ -16,22 +16,22 @@ class App extends React.Component {
 			<div className="reactBody container-fluid">
 				<div className="row">
 					<div className="col-md-3">	
-						<div className="row">
-							<ResourceUsage/>							
-						</div>
+						<ResourceUsage/>	
 					</div>
-					<div className="col-md-9">		
-						<div className="col-md-4">				
-							<ServicesManager/>		
+					<div className="col-md-9">
+						<div className="row col-md-12" style={{height:'auto'}}>
+							<div className="col-md-6">	
+								<ServicesManager/>		
+							</div>
+							<div className="col-md-6">	
+								<CoinGeckoTicker/>
+							</div>
+							<div className="col-md-12" style={{marginTop:'15px'}}>	
+								<FileManager/>					
+							</div>
 						</div>
-						<div className="col-md-5">
-							<CoinGeckoTicker/>
-						</div>	
-						<FileManager/>
-					</div>
 						
-					
-					
+					</div>
 				</div>
 			</div>		
 		)
