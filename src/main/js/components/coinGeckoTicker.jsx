@@ -1,3 +1,4 @@
+
 import React from 'react';
 import CoinGeckoTickerForm from './coinGeckoTickerForm.jsx';
 import CoinGeckoInfoModal from './coinGeckoInfoModal.jsx';
@@ -69,28 +70,30 @@ class CoinGeckoTicker extends React.Component {
 			coins = coins + item.geckoId+","
 		 );
 
+		if (coins.length > 0) {
 	
-		let url = "https://api.coingecko.com/api/v3/simple/price?ids="+coins+"&vs_currencies=usd%2Cbtc&include_24hr_change=true";
-		
-		fetch(url)
-		    .then(res => res.json())
-		    .then(
-		      (result) => {	
-			    this.setState({
-		          priceDataLoaded: true,
-		          priceData: result
+			let url = "https://api.coingecko.com/api/v3/simple/price?ids="+coins+"&vs_currencies=usd%2Cbtc&include_24hr_change=true";
 			
-		        });
-	
-		      },
-		      (error) => {
-				console.log(error);
-		        this.setState({
-		          priceDataLoaded: true,
-		          error
-		        });
-		      }
-		    )
+			fetch(url)
+			    .then(res => res.json())
+			    .then(
+			      (result) => {	
+				    this.setState({
+			          priceDataLoaded: true,
+			          priceData: result
+				
+			        });
+		
+			      },
+			      (error) => {
+					console.log(error);
+			        this.setState({
+			          priceDataLoaded: true,
+			          error
+			        });
+			      }
+			    )
+	    }
 	}
 	
 	showInfoModal = (event) => {
