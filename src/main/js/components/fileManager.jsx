@@ -74,7 +74,7 @@ class FileManager extends React.Component {
 						: <p>No folders being shared.</p>			    
 					}
 				    <FileManagerAddForm parentFetchData={this.fetchData} />
-				    <FileManagerViewModal parentFetchData={this.fetchData} fileLocation={this.state.selectedFileLocation} />
+				    <FileManagerViewModal parentFetchData={this.fetchData} parentData={this.state.data} fileLocation={this.state.selectedFileLocation} />
 				  </div>
 				</div>
 			</div>

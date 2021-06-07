@@ -4,9 +4,10 @@ class FileManagerViewModal extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			fileLocation: this.props.selectedFileLocation,
+			fileLocation: this.props.fileLocation,
+			parentData: this.props.parentData,
 			isLoaded: false,
-			data: []			
+			data: []		
 		};
 		
 		this.handleDelete = this.handleDelete.bind(this);
@@ -14,12 +15,12 @@ class FileManagerViewModal extends React.Component {
 	
 	
 	handleDelete = () => {
-		console.log(this.state.fileLocation);
+		console.log(this.state.parentData);
 		// delete this.state.fileLocation
 		let url = null;
-		for (let i = 0 ; i < this.state.data._embedded.fileLocations.length; i++) {
-			if (this.state.data._embedded.fileLocations[i].fileLocation == this.state.fileLocation) {
-				url = this.state.data._embedded.fileLocations[i]._links.fileLocation.href;
+		for (let i = 0 ; i < this.state.parentData._embedded.fileLocations.length; i++) {
+			if (this.state.parentData._embedded.fileLocations[i].fileLocation == this.state.fileLocation) {
+				url = this.state.parentData._embedded.fileLocations[i]._links.fileLocation.href;
 				break;
 			}
 		}
@@ -49,7 +50,7 @@ class FileManagerViewModal extends React.Component {
 	
 	componentDidUpdate(prevProps) {
 		if (prevProps.fileLocation !== this.props.fileLocation) {
-			this.setState({data: [], isLoaded: false, fileLocation: this.props.fileLocation});
+			this.setState({data: [], isLoaded: false, fileLocation: this.props.fileLocation, parentData: this.props.parentData});
 			this.fetchData(this.props.fileLocation);
 		}
 	}
