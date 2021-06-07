@@ -17,7 +17,7 @@ class FileManagerAddForm extends React.Component {
 	
 	handleSubmit(event) {
 		// save data
-		const response = fetch("/api/fileLocations", {
+		const response = fetch("/api/saveFileLocation", {
 		    method: "POST", 
 		    headers: {
 		      "Content-Type": "application/json"
