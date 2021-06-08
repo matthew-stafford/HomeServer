@@ -60,6 +60,12 @@ public class ServerServiceDetector {
 			// check body for title and favicon
 			Document doc = Jsoup.connect(url + ":" + port).get();
 			sb.setName(doc.title());
+			
+			// if document has no title, give it a default name
+			if (doc.title() == null || doc.title().trim().length() == 0) {
+				sb.setName("Unknown web service");
+			}
+			
 			sb.setPort(port);
 			sb.setUrl(url + ":" + port);
 			Element element = doc.head().select("link[href~=.*\\.(ico|png|svg)]").first();

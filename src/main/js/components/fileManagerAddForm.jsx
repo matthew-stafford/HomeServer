@@ -28,7 +28,9 @@ class FileManagerAddForm extends React.Component {
 		.then(
 	      (result) => {
 			console.log(result);
-			
+			if (result.fileLocation == null) {
+				console.log("error: path invalid");
+			}
 			this.props.parentFetchData();
 			},
 	      (error) => {

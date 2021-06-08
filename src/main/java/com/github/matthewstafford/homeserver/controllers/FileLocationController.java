@@ -25,11 +25,6 @@ public class FileLocationController {
 	
 	@PostMapping("/api/saveFileLocation")
 	private FileLocation addFileLocation(@RequestBody Map<String, String> body) {
-		
-		for (Map.Entry<String, String> entry : body.entrySet()) {
-			System.out.println("key="+entry.getKey()+", value="+entry.getValue());
-		}
-		
 		return fileLocationService.addFileLocation(body.get("fileLocation"));
 	}
 	
