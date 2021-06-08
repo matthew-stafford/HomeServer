@@ -5,6 +5,7 @@ class FileManagerViewModal extends React.Component {
 		super(props);
 		this.state = {
 			fileLocation: this.props.fileLocation,
+			selectedLocation: [],
 			parentData: this.props.parentData,
 			isLoaded: false,
 			data: []		
@@ -57,8 +58,15 @@ class FileManagerViewModal extends React.Component {
 		
 	fetchData = (fileLocation) => {
 		if (fileLocation != null) {
+			console.log(fileLocation);
 			let url = "/api/files";
-			fetch(url)
+			fetch(url, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify( { fileLocation: fileLocation, selectedLocation: this.state.selectedLocation } )
+			})
 		    .then(res => res.json())
 		    .then(
 		      (result) => {	
@@ -88,7 +96,7 @@ class FileManagerViewModal extends React.Component {
 				      		<div className="modal-header">
 				        		{
 									this.state.isLoaded ? 
-										<p>Loading</p>
+										<h5>{this.state.fileLocation}</h5>
 										: null 
 								}
 				        		<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -102,7 +110,7 @@ class FileManagerViewModal extends React.Component {
 		     				</div>
 		    					<div className="modal-footer">
 		       					<button type="button" id="closeFileManagerViewModal" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-		       					<button type="button" onClick={this.handleDelete} type="submit" className="btn btn-danger">Delete file location</button>
+		       					<button type="button" onClick={this.handleDelete} type="submit" className="btn btn-danger">Stop sharing folder</button>
 		     					</div>
 		   				</div>
 		 				</div>

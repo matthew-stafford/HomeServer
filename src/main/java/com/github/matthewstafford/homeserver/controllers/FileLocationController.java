@@ -1,5 +1,6 @@
 package com.github.matthewstafford.homeserver.controllers;
 
+import java.io.File;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,33 @@ public class FileLocationController {
 		return fileLocationService.addFileLocation(body.get("fileLocation"));
 	}
 	
+	@PostMapping("/api/files")
+	private String[] listFiles(@RequestBody Map<String, Object> body) {
+		String fileLocation = body.get("fileLocation").toString();
+		
+		System.out.println("fileLocation="+fileLocation);
+		
+		if (fileLocation != null && fileLocation.length() > 0) {
+			// check prefix of path is in repo
+			boolean approved = false;
+			
+			for (FileLocation location: fileLocationRepository.findAll()) {
+				System.out.println("FileLocation="+fileLocation+", data="+location.getFileLocation());
+				if (location.getFileLocation().equalsIgnoreCase(fileLocation)) {
+					// ok
+					approved = true;
+					break;
+				}
+			}
+
+			System.out.println("approved="+approved);
+			if (approved) {
+				File file = new File(fileLocation);
+				return file.list();
+			}
+		}
+		
+		return null;
+	}
 	
 }

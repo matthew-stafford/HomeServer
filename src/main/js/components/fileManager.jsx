@@ -54,13 +54,13 @@ class FileManager extends React.Component {
 			<div id="fileManager">
 				<div className="card">
 				  <div className="card-body">
-				    <h5 className="card-title">Folder/Files</h5>
+				    <h5 className="card-title">Shared folders</h5>
 					{
 						this.state.isLoaded && this.state.data._embedded.fileLocations.length > 0 ?
 							<table className="table table-sm">
 								<thead>
 									<tr>
-								    	<th scope="col">Location</th>
+								    	<th scope="col">Folder</th>
 									</tr>
 								</thead>
 								<tbody>
